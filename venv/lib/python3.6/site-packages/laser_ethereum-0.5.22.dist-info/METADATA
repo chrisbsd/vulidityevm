@@ -1,0 +1,48 @@
+Metadata-Version: 2.0
+Name: laser-ethereum
+Version: 0.5.22
+Summary: Symbolic Ethereum virtual machine
+Home-page: UNKNOWN
+Author: Bernhard Mueller
+Author-email: bernhard.mueller11@gmail.com
+License: MIT
+Keywords: hacking security ethereum
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Software Development :: Testing
+Classifier: License :: Free for non-commercial use
+Classifier: Programming Language :: Python :: 3.5
+Requires-Python: >=3.5
+Requires-Dist: coverage
+Requires-Dist: py-flags
+Requires-Dist: z3-solver (>=4.5)
+
+
+LASER
+=======
+
+LASER is a symbolic Ethereum virtual machine.
+
+Installation and setup
+----------------------
+
+Install from Pypi:
+
+.. code:: bash
+
+    $ pip install laser-ethereum
+
+Usage
+------------------
+
+The easiest way to use LASER is by installing Mythril command line tool:
+
+.. code:: bash
+
+    $ pip install mythril
+    $ myth --init-db
+    $ myth --fire-laser -a [contract-address]
+
+
+

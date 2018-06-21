@@ -1,0 +1,11 @@
+pysha3>=1.0.1
+PyYAML
+repoze.lru
+scrypt
+pbkdf2
+py_ecc
+rlp>=0.4.7
+pyethash
+pycryptodome>=3.4.7
+coincurve>=7.0.0
+future
