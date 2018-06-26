@@ -24,8 +24,8 @@ class Vulidity:
         self.modules = []
 
     def who(self):
-        print("WRONG demo parameter!")
-        print("Brought to you by chrisbsd or chrislnx\n\n")
+        print("WRONG parameter!")
+        print("Brought to you by chrisbsd from\n\n")
         print("   __                _")
         print(" / __|___  ___  __ _| |___\n" +
               "| (_ / _ \/ _ \/ _` |   -_)\n" +
@@ -250,7 +250,7 @@ class solCon(ETHContract):
                 if len(mapping) > 2 and len(mapping[2]) > 0:
                     idx = int(mapping[2])
 
-                lineNumber = self.solidityFiles[idx].data[0:offset].count('\n') + 1
+                lineNumber = self.solidityFiles[idx].\data[0:offset].count('\n') + 1
                 self.mappings.append(SourceMapping(idx, offset, length, lineNumber))
         except Exception as exci:
             print("Something went wrong in srcmap analysis: {}".format(exci))
@@ -284,28 +284,16 @@ if __name__ == "__main__":
         elif sys.argv[1] is "demo3":
             vul.executeModule("/Users/davebsd/pyeth/contracts/underflow.sol", 1, False, "integer")
         elif sys.argv[1] is "demo4":
-            vul.calcFuncInfo("theFunction()")
+            vul.calcFuncInfo("balanceOf(address)")
+            vul.executeModule("/Users/davebsd/pyeth/contracts/underflow.sol", True, 1, "integer")
         elif sys.argv[1] is "demo5":
             vul.executeModule("/Users/davebsd/pyeth/contracts/delegatecall.sol", False, 1, "fallbackDelegate")
         else:
             vul.who()
     else:
         #vul.executeModule("/Users/davebsd/pyeth/contracts/delegatecall.sol", False, 1, "fallbackDelegate")
-        vul.executeModule("/Users/davebsd/pyeth/contracts/oflow.sol", False, 1, "integer")
+        #vul.executeModule("/Users/davebsd/vulidity/contracts/deldemo.sol", False, 1, "fallbackDelegate")
+        vul.who()
+        #vul.calcFuncInfo("balanceOf(address)")
         #vul.createEthAdr()
-        #vul.executeModule("/Users/davebsd/pyeth/contracts/underflow.sol", False, 1, "integer")
-
-#contract = SolidityContract("/Users/davebsd/smart-contract-security-examples/contracts/BrokenToken.sol")
-
-#disassembly = contract.disassembly
-#print(disassembly.instruction_list)
-#for elem in disassembly.instruction_list:
-#    print(elem.values())
-#calcFuncInfo("eineFunktion(uint256)")
-#vul = Vulidity()
-#vul.executeModule("/Users/davebsd/pyeth/contracts/oflow.sol", False, 1, "integer")
-#checker.calcFuncInfo("assertion2(uint256)")
-#vul.calcFuncInfo("theFunction()")
-#vul.executeModule("/Users/davebsd/pyeth/contracts/underflow.sol", 1, False, "integer")
-
-# Kategorien statt Type Objects
+        #vul.executeModule("/Users/davebsd/pyeth/contracts/underflow.sol", True, 1, "integer")

@@ -1,4 +1,5 @@
 from random import randint
+import time
 
 class Fund:
 
@@ -26,7 +27,7 @@ class Bericht:
         pass
 
     def issueAnfuegen(self, issue):
-        self.issues[(str(randint(0, 100)) + issue.title)] = issue
+        self.issues[(str(time.time() + randint(0, 100)) + issue.title)] = issue
 
     def ausgabe(self):
         snippet = []
