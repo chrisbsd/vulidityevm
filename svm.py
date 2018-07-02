@@ -44,7 +44,7 @@ class Vulidity:
     def calcFuncInfo(self, name):
         # sha3("setA(uint256)").hex()
         hash = sha3n(name).hex()
-        print("The method selector for {} is {}\nThe calldata is {}".format(name, hash[0:8], hash))
+        print("\n\nThe method selector for {} is {}\nThe calldata is {}\n\n".format(name, hash[0:8], hash))
 
     # Calculates the Address of a Key-Value Mapping in the EVM with related values e.g.
     # calcAddr(0xAAAA, 0, 0xAAAA)
@@ -81,7 +81,7 @@ class Vulidity:
         return ethMap
 
     def executeModule(self, contractPath,  instructionList, countAdr=1, moduleName=None, addr = ""):
-        print("Nearly a googol calculations will take place to analyse your SmartContract! Try who() if you are curious!\n\n")
+        print("Nearly a googol calculations will take place in order to analyse your SmartContract! Try who() if you are curious!\n\n")
         vulstate = Stateenv(contractPath,  instructionList, countAdr, addr)
 
         #ret = self.pickModule(svm, module_name)
@@ -250,7 +250,7 @@ class solCon(ETHContract):
                 if len(mapping) > 2 and len(mapping[2]) > 0:
                     idx = int(mapping[2])
 
-                lineNumber = self.solidityFiles[idx].\data[0:offset].count('\n') + 1
+                lineNumber = self.solidityFiles[idx].data[0:offset].count('\n') + 1
                 self.mappings.append(SourceMapping(idx, offset, length, lineNumber))
         except Exception as exci:
             print("Something went wrong in srcmap analysis: {}".format(exci))
@@ -277,23 +277,17 @@ if __name__ == "__main__":
 
     vul = Vulidity()
     if len(sys.argv) > 1:
-        if sys.argv[1] is "demo1":
-            vul.createEthAdr()
-        elif sys.argv[1] is "demo2":
+        if sys.argv[1] == "demo1":
             vul.executeModule("/Users/davebsd/pyeth/contracts/oflow.sol", False, 1, "integer")
-        elif sys.argv[1] is "demo3":
-            vul.executeModule("/Users/davebsd/pyeth/contracts/underflow.sol", 1, False, "integer")
-        elif sys.argv[1] is "demo4":
+        elif sys.argv[1] == "demo2":
+            vul.executeModule("/Users/davebsd/vulidity/contracts/deldemo.sol", False, 1, "fallbackDelegate")
+        elif sys.argv[1] == "demo3":
             vul.calcFuncInfo("balanceOf(address)")
             vul.executeModule("/Users/davebsd/pyeth/contracts/underflow.sol", True, 1, "integer")
-        elif sys.argv[1] is "demo5":
+        elif sys.argv[1] == "demo4":
             vul.executeModule("/Users/davebsd/pyeth/contracts/delegatecall.sol", False, 1, "fallbackDelegate")
         else:
             vul.who()
     else:
-        #vul.executeModule("/Users/davebsd/pyeth/contracts/delegatecall.sol", False, 1, "fallbackDelegate")
-        #vul.executeModule("/Users/davebsd/vulidity/contracts/deldemo.sol", False, 1, "fallbackDelegate")
         vul.who()
-        #vul.calcFuncInfo("balanceOf(address)")
-        #vul.createEthAdr()
-        #vul.executeModule("/Users/davebsd/pyeth/contracts/underflow.sol", True, 1, "integer")
+
